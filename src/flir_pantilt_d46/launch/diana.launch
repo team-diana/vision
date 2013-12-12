@@ -1,0 +1,28 @@
+<launch>
+	<node name="ptu" pkg="flir_pantilt_d46" type="ptu_d46" output="screen">
+		<param name="port" value="/dev/pantilt"/>
+	</node>
+	<node name="ptu_action_server" pkg="flir_pantilt_d46" type="ptu_action_server.py" output="screen">
+		<remap from="cmd" to="/ptu/cmd"/>
+		<remap from="state" to="/ptu/state"/>
+	</node>
+
+
+ 
+ <arg name="gui" default="true" />
+ <param name="robot_description" command="cat $(find flir_pantilt_d46)/diana_model.xml" />
+ <param name="use_gui" value="$(arg gui)"/>
+ <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+    <rosparam param="source_list">[/ptu/state, joint_states, /motore_1_controller/joint_states, /motore_2_controller/joint_states, /motore_3_controller/joint_states, /motore_4_controller/joint_states]</rosparam>
+ </node>
+ 
+ <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <remap from="robot_description" to="robot_description" />
+ </node>
+ 
+ 
+ 
+ 
+ 
+ 
+</launch>

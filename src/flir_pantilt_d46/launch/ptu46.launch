@@ -1,0 +1,25 @@
+<launch>
+	<node name="ptu" pkg="flir_pantilt_d46" type="ptu_d46" output="screen">
+		<param name="port" value="/dev/ttyUSB1"/>
+	</node>
+	<node name="ptu_action_server" pkg="flir_pantilt_d46" type="ptu_action_server.py" output="screen">
+		<remap from="cmd" to="/ptu/cmd"/>
+		<remap from="state" to="/ptu/state"/>
+	</node>
+ 
+ 
+ 
+ 
+ <param name="robot_description" command="cat diana_model.xml" />
+ 
+ <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+      <remap from="robot_description" to="robot_description" />
+      <remap from="joint_states" to="/ptu/state" />
+ </node>
+ 
+ 
+ 
+ 
+ 
+ 
+</launch>

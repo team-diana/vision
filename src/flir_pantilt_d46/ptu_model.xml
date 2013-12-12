@@ -1,0 +1,84 @@
+<robot name="ptu">
+
+<link name="base">
+  
+  <visual>
+    <origin xyz="0 0 .023" rpy="0 0 0" />
+    <geometry>
+      <box size=".089 .064 .046" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 .023" rpy="0 0 0" />
+    <geometry>
+      <box size=".089 .064 .046" />
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<link name="testa">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz=".023 0 .033" rpy="0 0 0" />
+    <geometry>
+      <box size=".090 .043 .066" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+
+</link>
+
+<joint name="pan" type="continuous">
+  <origin xyz="0.0225 -0.012 .046" rpy="0 0 3.14" />
+  <axis xyz="0 0 1" />
+  <parent link="base"/>
+  <child link="testa"/>
+</joint>
+
+
+<link name="braccio">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 -.014" rpy="0 0 0" />
+    <geometry>
+      <box size=".020 .061 .049" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 -.014" rpy="0 0 0" />
+    <geometry>
+      <box size=".020 .061 .049" />
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="tilt" type="continuous">
+  <origin xyz="0 0 .044" rpy="3.14 0 0" />
+  <axis xyz="0 -1 0" />
+  <parent link="testa"/>
+  <child link="braccio"/>
+</joint>
+
+
+
+</robot>

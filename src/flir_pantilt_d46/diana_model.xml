@@ -1,0 +1,746 @@
+<robot name="diana">
+
+<link name="chassis">
+  
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".492 .334 .100" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".492 .334 .100" />
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="chassis_to_pan_tilt" type="fixed">
+  <origin xyz="0.195 0 .05" rpy="0 0 0" />
+  <axis xyz="0 0 1" />
+  <parent link="chassis"/>
+  <child link="base"/>
+</joint>
+
+
+<link name="base">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 .023" rpy="0 0 0" />
+    <geometry>
+      <box size=".089 .064 .046" />
+    </geometry>
+    <material name="black">
+      <color rgba="0 0 0 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 .023" rpy="0 0 0" />
+    <geometry>
+      <box size=".089 .064 .046" />
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<link name="testa">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz=".023 0 .033" rpy="0 0 0" />
+    <geometry>
+      <box size=".090 .043 .066" />
+    </geometry>
+    <material name="black">
+      <color rgba="0 0 0 1" />
+    </material>
+  </visual>
+
+</link>
+
+<joint name="pan" type="continuous">
+  <origin xyz="0.0225 -0.012 .046" rpy="0 0 3.14" />
+  <axis xyz="0 0 1" />
+  <parent link="base"/>
+  <child link="testa"/>
+</joint>
+
+
+<link name="braccio">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 -.014" rpy="0 0 0" />
+    <geometry>
+      <box size=".020 .061 .049" />
+    </geometry>
+    <material name="black">
+      <color rgba="0 0 0 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 0 -.014" rpy="0 0 0" />
+    <geometry>
+      <box size=".020 .061 .049" />
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="tilt" type="continuous">
+  <origin xyz="0 0 .044" rpy="3.14 0 0" />
+  <axis xyz="0 -1 0" />
+  <parent link="testa"/>
+  <child link="braccio"/>
+</joint>
+
+
+<link name="camera">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -0.02 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".200 .040 .040" />
+    </geometry>
+    <material name="dark_grey">
+      <color rgba=".05 .05 .05 1" />
+    </material>
+  </visual>
+</link>
+
+<joint name="braccio_to_camera" type="fixed">
+  <origin xyz="0 0 -0.040" rpy="-1.57 3.14 1.57" />
+  <axis xyz="0 -1 0" />
+  <parent link="braccio"/>
+  <child link="camera"/>
+</joint>
+
+
+
+<link name="Range_Front_Down">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".01 .03 .01" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+</link>
+
+<joint name="chassis_to_rfd" type="fixed">
+  <origin xyz=".246 0 -.05" rpy="0 1.57 0" />
+  <axis xyz="0 0 0" />
+  <parent link="chassis"/>
+  <child link="Range_Front_Down"/>
+</joint>
+
+
+<link name="Range_Front">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".01 .03 .01" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+</link>
+
+<joint name="chassis_to_rf" type="fixed">
+  <origin xyz=".246 0 -.05" rpy="0 0 0" />
+  <axis xyz="0 0 0" />
+  <parent link="chassis"/>
+  <child link="Range_Front"/>
+</joint>
+
+
+
+<link name="Range_Post_Down">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".01 .03 .01" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+</link>
+
+<joint name="chassis_to_rpd" type="fixed">
+  <origin xyz="-.246 0 -.05" rpy="0 1.57 0" />
+  <axis xyz="0 0 0" />
+  <parent link="chassis"/>
+  <child link="Range_Post_Down"/>
+</joint>
+
+
+
+<link name="Range_Post">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".01 .03 .01" />
+    </geometry>
+    <material name="gray">
+      <color rgba=".2 .2 .2 1" />
+    </material>
+  </visual>
+</link>
+
+<joint name="chassis_to_rp" type="fixed">
+  <origin xyz="-.246 0 -.05" rpy="0 3.14 0" />
+  <axis xyz="0 0 0" />
+  <parent link="chassis"/>
+  <child link="Range_Post"/>
+</joint>
+
+
+
+<link name="leg_f_l">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 .023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 .023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="hub_f_l" type="continuous">
+  <origin xyz=".130 .167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 -1 0" />
+  <parent link="chassis"/>
+  <child link="leg_f_l"/>
+</joint>
+
+
+<link name="leg_f_r">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -.023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 -.023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="hub_f_r" type="continuous">
+  <origin xyz=".130 -.167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 -1 0" />
+  <parent link="chassis"/>
+  <child link="leg_f_r"/>
+</joint>
+
+
+<link name="leg_p_l">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 .023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 .023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="hub_p_l" type="continuous">
+  <origin xyz="-.130 .167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="chassis"/>
+  <child link="leg_p_l"/>
+</joint>
+
+
+<link name="leg_p_r">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -.023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 -.023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="hub_p_r" type="continuous">
+  <origin xyz="-.130 -.167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="chassis"/>
+  <child link="leg_p_r"/>
+</joint>
+
+
+<link name="wheel_f_l">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 .035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 .035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="shaft_f_l" type="continuous">
+  <origin xyz="0 .050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_f_l"/>
+  <child link="wheel_f_l"/>
+</joint>
+
+
+<link name="wheel_f_r">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -.035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 -.035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="shaft_f_r" type="continuous">
+  <origin xyz="0 -.050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_f_r"/>
+  <child link="wheel_f_r"/>
+</joint>
+
+
+<link name="wheel_p_l">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 .035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 .035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="shaft_p_l" type="continuous">
+  <origin xyz="0 .050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_p_l"/>
+  <child link="wheel_p_l"/>
+</joint>
+
+
+<link name="wheel_p_r">
+  <inertial>
+    <mass value="1"/>
+    <inertia ixx="100" ixy="0" ixz="0" iyy="100" iyz="0" izz="100" />
+    <origin/>
+  </inertial>
+  <visual>
+    <origin xyz="0 -.035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="gold">
+      <color rgba=".39 .35 .13 1" />
+    </material>
+  </visual>
+
+  <collision>
+    <origin xyz="0 -.035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <contact_coefficients mu="0" kp="1000.0" kd="1.0"/>
+  </collision>
+</link>
+
+<joint name="shaft_p_r" type="continuous">
+  <origin xyz="0 -.050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_p_r"/>
+  <child link="wheel_p_r"/>
+</joint>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<joint name="delta_h" type="prismatic">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <limit effort="1000.0" lower="-1" upper="1" velocity="1"/>
+  <axis xyz="0 0 1" />
+  <parent link="chassis"/>
+  <child link="h_to_r"/>
+</joint>
+
+<link name="h_to_r">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".0 .0 .0" />
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="rpy_r" type="continuous">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <axis xyz="1 0 0" />
+  <parent link="h_to_r"/>
+  <child link="r_to_y"/>
+</joint>
+
+<link name="r_to_y">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".0 .0 .0" />
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="rpy_y" type="continuous">
+  <origin xyz="0 0 0" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="r_to_y"/>
+  <child link="chassis_virtuale"/>
+</joint>
+
+<link name="chassis_virtuale">
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <geometry>
+      <box size=".492 .334 .100" />
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+
+
+
+<link name="leg_f_l_virtuale">
+  <visual>
+    <origin xyz="0 .023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="hub_f_l_virtuale" type="continuous">
+  <origin xyz=".130 .167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 -1 0" />
+  <parent link="chassis_virtuale"/>
+  <child link="leg_f_l_virtuale"/>
+</joint>
+
+
+<link name="leg_f_r_virtuale">
+  <visual>
+    <origin xyz="0 -.023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="hub_f_r_virtuale" type="continuous">
+  <origin xyz=".130 -.167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 -1 0" />
+  <parent link="chassis_virtuale"/>
+  <child link="leg_f_r_virtuale"/>
+</joint>
+
+
+<link name="leg_p_l_virtuale">
+  <visual>
+    <origin xyz="0 .023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="hub_p_l_virtuale" type="continuous">
+  <origin xyz="-.130 .167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="chassis_virtuale"/>
+  <child link="leg_p_l_virtuale"/>
+</joint>
+
+
+<link name="leg_p_r_virtuale">
+  <visual>
+    <origin xyz="0 -.023 -.100" rpy="0 0 0" />
+    <geometry>
+      <cylinder length=".200" radius=".008"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="hub_p_r_virtuale" type="continuous">
+  <origin xyz="-.130 -.167 -0.011" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="chassis_virtuale"/>
+  <child link="leg_p_r_virtuale"/>
+</joint>
+
+
+<link name="wheel_f_l_virtuale">
+  <visual>
+    <origin xyz="0 .035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="shaft_f_l_virtuale" type="continuous">
+  <origin xyz="0 .050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_f_l_virtuale"/>
+  <child link="wheel_f_l_virtuale"/>
+</joint>
+
+
+<link name="wheel_f_r_virtuale">
+  <visual>
+    <origin xyz="0 -.035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="shaft_f_r_virtuale" type="continuous">
+  <origin xyz="0 -.050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_f_r_virtuale"/>
+  <child link="wheel_f_r_virtuale"/>
+</joint>
+
+
+<link name="wheel_p_l_virtuale">
+  <visual>
+    <origin xyz="0 .035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="shaft_p_l_virtuale" type="continuous">
+  <origin xyz="0 .050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_p_l_virtuale"/>
+  <child link="wheel_p_l_virtuale"/>
+</joint>
+
+
+<link name="wheel_p_r_virtuale">
+  <visual>
+    <origin xyz="0 -.035 0" rpy="1.57 0 0" />
+    <geometry>
+      <cylinder length=".070" radius=".090"/>
+    </geometry>
+    <material name="red">
+      <color rgba=".8 .0 .0 .5" />
+    </material>
+  </visual>
+</link>
+
+<joint name="shaft_p_r_virtuale" type="continuous">
+  <origin xyz="0 -.050 -.200" rpy="0 0 0" />
+  <axis xyz="0 1 0" />
+  <parent link="leg_p_r_virtuale"/>
+  <child link="wheel_p_r_virtuale"/>
+</joint>
+
+</robot>
