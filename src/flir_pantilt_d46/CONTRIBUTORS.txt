@@ -1,0 +1,2 @@
+This package was created by cburbridge and available here
+https://github.com/cburbridge/flir_pantilt_d46
