@@ -45,6 +45,7 @@
 #include <pgr_camera/PgrCamera.h>
 #include <camera_info_manager/camera_info_manager.h>
 
+
 // Dynamic reconfigure
 #include <dynamic_reconfigure/server.h>
 #include <driver_base/SensorLevels.h>
@@ -273,6 +274,27 @@ void PgrCameraNode::publishImageWithTimestamp ( FlyCapture2::Image *frame, int c
 
         publishedCount++;
         oneshotCount++;
+
+        // Convert the raw image
+
+        FlyCapture2::Image convertedImage;
+        FlyCapture2::Error error = frame->Convert( PIXEL_FORMAT_RGBU, &convertedImage );
+        if (error != PGRERROR_OK)
+        {
+            ROS_INFO( "Unable to save image to file: %s",  error.GetDescription());
+        }
+
+        // Create a unique filename
+        string frameFilename;
+        frameFilename = boost::str ( boost::format ( "frame%d-%d.png" ) % camIndex % publishedCount);
+
+        // Save the image. If a file format is not passed in, then the file
+        // extension is parsed to attempt to determine the file format.
+        error = convertedImage.Save( frameFilename.c_str());
+        if (error != PGRERROR_OK)
+        {
+            ROS_INFO( "Unable to write image to file: %s",  error.GetDescription());
+        }
 
         pgr_camera::published published;
         published.published = true;
