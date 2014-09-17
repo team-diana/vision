@@ -1,8 +1,0 @@
-float32 pan_min
-float32 pan_max
-float32 pan_step
-float32 tilt_min
-float32 tilt_max
-float32 tilt_step
----
-bool ok
