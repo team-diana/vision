@@ -1,0 +1,3 @@
+[submodule "src/pgr_camera"]
+	path = src/pgr_camera
+	url = git@github.com:team-diana/pgr_camera.git
